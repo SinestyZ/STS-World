@@ -1,0 +1,455 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #000000; /* ĐẶT MÀU NỀN LÀ ĐEN TUYỀN */
+    
+    /* CÁC THUỘC TÍNH NỀN ĐỘNG CHO GIF */
+    background-image: url(https://media.discordapp.net/attachments/1368906879505272983/1375379374508998716/download.gif?ex=6839625c&is=683810dc&hm=01a988c26d291e59d2c115b6aebb42e96df0f37f1968d6525c76f596bda30ac0&=); /* THAY THẾ BẰNG URL ẢNH GIF CỦA BẠN */
+    background-size: cover; /* Đảm bảo ảnh nền phủ toàn bộ body */
+    background-position: center center; /* Căn giữa ảnh nền */
+    background-repeat: no-repeat; /* Không lặp lại ảnh nền */
+    background-blend-mode: lighten; /* Chế độ hòa trộn cho hiệu ứng thẩm mỹ (có thể điều chỉnh) */
+    animation: backgroundShift 20s linear infinite, moveAndPulse 15s infinite alternate; /* Kích hoạt các animation */
+
+    /* GIẢM ĐỘ SÁNG CỦA NỀN GIF */
+    filter: brightness(0.5); /* Điều chỉnh giá trị này (0.0 đến 1.0) */
+    /* 1.0 là độ sáng gốc, 0.7 là giảm 30% độ sáng, 0.5 là giảm 50% độ sáng */
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    min-height: 100vh;
+    position: relative;
+    z-index: 1; /* Đảm bảo nội dung hiển thị trên nền */
+    overflow-x: hidden; /* Ngăn chặn scrollbar ngang nếu có */
+}
+
+/* @keyframes CHO HIỆU ỨNG NỀN ĐỘNG "MOVE AND PULSE" */
+@keyframes moveAndPulse {
+    0% {
+        background-position: 0% 0%;
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        background-position: 100% 100%; /* Hoặc một giá trị khác để di chuyển */
+        transform: scale(1.05); /* Hiệu ứng phồng nhẹ */
+        opacity: 0.9; /* Giảm độ trong suốt nhẹ */
+    }
+    100% {
+        background-position: 0% 0%;
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* @keyframes CHO HIỆU ỨNG NỀN ĐỘNG "BACKGROUND SHIFT" */
+@keyframes backgroundShift {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 100% 100%; }
+}
+
+/* LỚP PHỦ NỀN BODY::BEFORE VỚI HIỆU ỨNG LƯỚI "GRID ANIMATION" */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Tạo lưới */
+    background-image: linear-gradient(to right, rgba(0, 255, 255, 0.08) 1px, transparent 1px),
+                      linear-gradient(to bottom, rgba(0, 255, 255, 0.08) 1px, transparent 1px);
+    background-size: 50px 50px; /* Kích thước ô lưới */
+    opacity: 0.2; /* Độ trong suốt của lưới */
+    z-index: 2; /* Đảm bảo lưới nằm trên nền nhưng dưới nội dung chính */
+    animation: gridAnimation 10s linear infinite; /* Animation cho lớp phủ lưới */
+}
+
+/* @keyframes CHO HIỆU ỨNG LƯỚI "GRID ANIMATION" */
+@keyframes gridAnimation {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 50px 50px; /* Dịch chuyển lưới */
+    }
+}
+
+/* CÁC STYLE MỚI CHO LOGO (ở góc trên bên trái) */
+.site-logo-container {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    z-index: 10;
+    background-color: rgba(0, 0, 0, 0.0); /* Vẫn giữ nền mờ cho khung logo nếu muốn */
+    padding: 10px 20px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.site-logo {
+    max-width: 125px;
+    height: auto;
+    filter: drop-shadow(0 0 10px rgba(0, 255, 255, 0.7)) drop-shadow(0 0 20px rgba(0, 255, 255, 0.5)); /* Hiệu ứng phát sáng cho logo */
+    transition: filter 0.3s ease;
+}
+
+.site-logo:hover {
+    filter: drop-shadow(0 0 15px rgba(0, 255, 255, 0.9)) drop-shadow(0 0 30px rgba(0, 255, 255, 0.7));
+}
+
+/* TIÊU ĐỀ CHÍNH "ABYSS WORLD" */
+.main-title {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    color: #00ffff; /* Màu chữ xanh neon */
+    font-size: 3.5em;
+    font-weight: bold;
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.7), 0 0 20px rgba(0, 255, 255, 0.5); /* Hiệu ứng phát sáng chữ */
+    z-index: 10;
+    letter-spacing: 2px;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.0); /* Nền mờ cho tiêu đề */
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+/* CONTAINER CỦA CÁC NÚT CHÍNH */
+.container {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    z-index: 5;
+    position: relative;
+    justify-content: center;
+    flex-wrap: wrap;
+    /* Có thể thêm margin-top ở đây nếu các nút quá sát với tiêu đề */
+}
+
+.new-page-buttons {
+    margin-top: 50px;
+    margin-bottom: auto;
+}
+
+/* Styles chung cho button-wrapper */
+.button-wrapper {
+    position: relative;
+    padding: 2px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+    transition: padding 0.3s ease, box-shadow 0.3s ease;
+    animation: borderGlow 3s infinite alternate; /* Hiệu ứng phát sáng viền */
+    z-index: 6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    border-radius: 8px;
+}
+
+/* Keyframes cho hiệu ứng viền phát sáng */
+@keyframes borderGlow {
+    0% { box-shadow: 0 0 15px rgba(0, 255, 255, 0.5); }
+    100% { box-shadow: 0 0 30px rgba(0, 255, 255, 0.8), 0 0 10px rgba(0, 255, 255, 0.2); }
+}
+
+.button-wrapper:hover {
+    padding: 4px;
+    box-shadow: 0 0 25px rgba(0, 255, 255, 0.7), 0 0 15px rgba(0, 255, 255, 0.3);
+}
+
+/* Styles chung cho custom-button (phần chính của nút) */
+.custom-button {
+    background-color: rgba(0, 0, 0, 0.0); /* Nền đen trong suốt 50% cho nút */
+    color: #000000;
+    padding: 35px 70px;
+    border: none;
+    border-radius: 7px;
+    font-size: 1.2em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-sizing: border-box;
+    text-align: center;
+    min-width: 280px;
+    outline: none;
+    z-index: 7;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.custom-button:hover {
+    background-color: rgba(0, 0, 0, 0.0);
+    transform: translateY(-3px);
+}
+
+.custom-button:active {
+    transform: translateY(0);
+}
+
+/* Pseudo-element cho viền gradient bên trong button-wrapper */
+.button-wrapper::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    background: linear-gradient(45deg, #00ffff, #007bff) border-box;
+    
+    mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+    -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+    
+    mask-composite: exclude;
+    -webkit-mask-composite: xor;
+    
+    animation: borderGradient 3s infinite alternate;
+    transition: opacity 0.3s ease;
+    z-index: 1; /* Đảm bảo viền nằm dưới nội dung nút */
+}
+
+@keyframes borderGradient {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+}
+
+.button-wrapper:hover::before {
+    opacity: 1;
+}
+
+/* NÚT QUAY LẠI TRANG CHỦ HOẶC TRANG TRƯỚC (nếu có) */
+.back-button-wrapper {
+    position: absolute;
+    top: 50px;
+    left: 50px;
+    z-index: 15;
+}
+
+.back-button {
+    padding: 15px 30px;
+    font-size: 1em;
+    min-width: unset;
+    background-color: rgba(0, 0, 0, 0.0);
+    border-radius: 5px;
+}
+
+/* THÔNG TIN GIẤY PHÉP */
+.license-info {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #8892b0;
+    font-size: 1.0em;
+    z-index: 10;
+    white-space: nowrap;
+    background-color: rgba(0, 0, 0, 0.0);
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.license-info a {
+    color: #00ffff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.license-info a:hover {
+    color: #00e0e0;
+    text-decoration: underline;
+}
+
+/* FOOTER */
+.footer {
+    margin-top: auto; /* Đẩy footer xuống dưới cùng */
+    width: 100%;
+    text-align: center;
+    color: #8892b0;
+    font-size: 0.9em;
+    z-index: 9;
+    padding-bottom: 5px;
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.0);
+    padding: 10px 0;
+}
+
+.footer p {
+    margin: 5px 0;
+}
+
+.license-link {
+    color: #00ffff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.license-link:hover {
+    color: #00e0e0;
+    text-decoration: underline;
+}
+
+/* BOX DISCORD Ở GÓC TRÊN CÙNG BÊN PHẢI */
+.top-right-box-wrapper {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    z-index: 20;
+
+    padding: 2px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+    transition: padding 0.3s ease, box-shadow 0.3s ease;
+    animation: borderGlow 3s infinite alternate;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+}
+
+.top-right-box-wrapper:hover {
+    padding: 4px;
+    box-shadow: 0 0 25px rgba(0, 255, 255, 0.7), 0 0 15px rgba(0, 255, 255, 0.3);
+}
+
+.top-right-box-wrapper::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    background: linear-gradient(45deg, #00ffff, #007bff) border-box;
+    
+    mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+    -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+    
+    mask-composite: exclude;
+    -webkit-mask-composite: xor;
+    
+    animation: borderGradient 3s infinite alternate;
+    transition: opacity 0.3s ease;
+    z-index: 1; /* Đảm bảo viền nằm dưới nội dung nút */
+}
+
+@keyframes borderGradient {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+}
+
+.top-right-box-wrapper:hover::before {
+    opacity: 1;
+}
+
+.top-right-button {
+    background-color: rgba(0, 0, 0, 0.0);
+    color: #000000;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 7px;
+    font-size: 0.9em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-sizing: border-box;
+    text-align: center;
+    min-width: unset;
+    outline: none;
+    z-index: 7;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.top-right-button:hover {
+    background-color: rgba(0, 0, 0, 0.0);
+    transform: translateY(-3px);
+}
+
+/* 4 BOX THÔNG TIN (INFO CARDS) */
+.info-cards-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 60px;
+    margin-bottom: 60px;
+    padding: 0 20px;
+    max-width: 1200px;
+    width: 100%;
+    justify-content: center;
+    align-items: start;
+    z-index: 5;
+}
+
+.info-card {
+    background-color: rgba(0, 0, 0, 0.0);
+    border-radius: 10px;
+    padding: 30px;
+    text-align: center;
+    color: #e0e6ed;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    min-height: 180px;
+}
+
+.info-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 25px rgba(0, 255, 255, 0.4);
+}
+
+.info-icon {
+    font-size: 3.5em;
+    color: #00ffff;
+    margin-bottom: 15px;
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
+}
+
+.info-card h3 {
+    font-size: 1.5em;
+    color: #00ffff;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.info-card p {
+    font-size: 1em;
+    color: #8892b0;
+    line-height: 1.5;
+}
+
+/* Responsive adjustments for info cards */
+@media (max-width: 768px) {
+    .info-cards-section {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        padding: 0 15px;
+    }
+
+    .info-card {
+        padding: 20px;
+    }
+
+    .info-icon {
+        font-size: 3em;
+    }
+
+    .info-card h3 {
+        font-size: 1.3em;
+    }
+}
+
+@media (max-width: 480px) {
+    .info-cards-section {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        padding: 0 10px;
+    }
+}
